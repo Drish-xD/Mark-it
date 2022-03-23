@@ -69,6 +69,7 @@ const CompanyRegister = ({ navigation }) => {
 
     data2.append("username", adminname);
     data2.append("pass", adminpassword);
+    data2.append("company_id", "1");
 
     const config1 = {
       method: "post",
@@ -103,7 +104,7 @@ const CompanyRegister = ({ navigation }) => {
     <View style={styles.containerStyle}>
       <ImageBackground
         source={{
-          uri: "https://raw.githubusercontent.com/Drish-xD/attendence/master/assets/bg.png",
+          uri: "https://raw.githubusercontent.com/Drish-xD/SIH-Hackthon/master/assets/bg.png",
         }}
         resizeMode="cover"
         style={styles.containerStyle}

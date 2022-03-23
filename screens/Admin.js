@@ -36,7 +36,7 @@ const Admin = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground
         source={{
-          uri: "https://raw.githubusercontent.com/Drish-xD/attendence/master/assets/bg.png",
+          uri: "https://raw.githubusercontent.com/Drish-xD/SIH-Hackthon/master/assets/bg.png",
         }}
         resizeMode="repeat"
         style={styles.container}

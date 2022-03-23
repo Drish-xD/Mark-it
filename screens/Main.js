@@ -45,7 +45,7 @@ const Main = ({ navigation }) => {
 
   const entryAttendence = async () => {
     const form = new FormData();
-
+    
     form.append("image", image);
     form.append("company_id", "1");
     form.append("lat", location.coords.latitude);
@@ -96,7 +96,7 @@ const Main = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground
         source={{
-          uri: "https://raw.githubusercontent.com/Drish-xD/attendence/master/assets/bg.png",
+          uri: "https://raw.githubusercontent.com/Drish-xD/SIH-Hackthon/master/assets/bg.png",
         }}
         resizeMode="cover"
         style={styles.container}
@@ -126,7 +126,7 @@ const Main = ({ navigation }) => {
         >
           Admin Login
         </Button>
-        
+
         {image && (
           <Image
             source={{ uri: image }}

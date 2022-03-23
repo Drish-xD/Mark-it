@@ -59,7 +59,7 @@ const CompanyLogin = ({ navigation }) => {
     <View style={styles.containerStyle}>
       <ImageBackground
         source={{
-          uri: "https://raw.githubusercontent.com/Drish-xD/attendence/master/assets/bg.png",
+          uri: "https://raw.githubusercontent.com/Drish-xD/SIH-Hackthon/master/assets/bg.png",
         }}
         resizeMode="cover"
         style={styles.containerStyle}
