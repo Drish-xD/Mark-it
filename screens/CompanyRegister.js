@@ -11,7 +11,6 @@ import { TimePicker } from "react-native-simple-time-picker";
 import { useController, useForm } from "react-hook-form";
 import { Button, Divider } from "react-native-paper";
 import * as Location from "expo-location";
-import FormData from "form-data";
 import moment from "moment";
 import axios from "axios";
 
@@ -43,7 +42,7 @@ const CompanyRegister = ({ navigation }) => {
     })();
   }, []);
 
-  const companyRegister = ({
+  const companyRegister = async ({
     companyname,
     companypassword,
     entertime,
@@ -51,44 +50,30 @@ const CompanyRegister = ({ navigation }) => {
     adminname,
     adminpassword,
   }) => {
-    const data1 = new FormData();
-    const data2 = new FormData();
-
-    data1.append("name", companyname);
-    data1.append("pass", companypassword);
-    data1.append("lat", location.coords.latitude);
-    data1.append("long", location.coords.longitude);
-    data1.append(
-      "entry_time",
-      moment(`${entertime.hours}:${entertime.minutes}`, "H:m").format()
-    );
-    data1.append(
-      "exit_time",
-      moment(`${exittime.hours}:${exittime.minutes}`, "H:m").format()
-    );
-
-    data2.append("username", adminname);
-    data2.append("pass", adminpassword);
-    data2.append("company_id", "1");
-
-    const config1 = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/companyregister",
-      data: data1,
-    };
-
-    console.log(data2);
-    const config2 = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/adminregister",
-      data: data2,
-    };
-
-    axios
-      .all([axios(config1), axios(config2)])
+    await all([
+      axios.post("https://attendance-backend.bakaotaku.dev/companyregister", {
+        name: companyname,
+        pass: companypassword,
+        lat: location.coords.latitude,
+        long: location.coords.longitude,
+        entry_time: moment(
+          `${entertime.hours}:${entertime.minutes}`,
+          "H:m"
+        ).format(),
+        exit_time: moment(
+          `${exittime.hours}:${exittime.minutes}`,
+          "H:m"
+        ).format(),
+      }),
+      axios.post("https://attendance-backend.bakaotaku.dev/adminregister", {
+        username: adminname,
+        pass: adminname,
+        company_id: 1,
+      }),
+    ])
       .then(
         axios.spread((data1, data2) => {
-          console.log("data1", data1.data, "data2", data2.data);
+          console.log("Company_Data", data1.data, "Admin_Data", data2.data);
           navigation.navigate("CompanyLogin");
         })
       )

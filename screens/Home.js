@@ -1,4 +1,4 @@
-import { Button, ActivityIndicator } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 
 const Home = ({ navigation }) => {

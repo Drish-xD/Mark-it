@@ -12,7 +12,6 @@ import { FormBuilder } from "react-native-paper-form-builder";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import FormData from "form-data";
 import axios from "axios";
 
 const AddUser = ({ navigation }) => {
@@ -34,26 +33,19 @@ const AddUser = ({ navigation }) => {
   }, []);
 
   const registerFace = ({ employeename, gender }) => {
-    const formData = new FormData();
-
-    formData.append("name", employeename);
-    formData.append("gender", gender);
-    formData.append("company_id", "1");
-    formData.append("image", image);
-
-    var config = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/registerface",
-      data: formData,
-    };
-
-    axios(config)
+    await axios
+      .post("https://attendance-backend.bakaotaku.dev/registerface", {
+        company_id: 1,
+        name: employeename,
+        gender: gender,
+        image: image,
+      })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response));
         navigation.navigate("Main");
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -126,7 +118,7 @@ const AddUser = ({ navigation }) => {
           />
           {image && (
             <Image
-              source={{ uri: image }}
+              source={{ uri: `data:image/jpeg;base64,${image}` }}
               style={{ height: 100, width: 100, alignSelf: "center" }}
             />
           )}

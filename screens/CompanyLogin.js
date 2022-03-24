@@ -9,7 +9,6 @@ import {
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 import { Button, Divider } from "react-native-paper";
-import FormData from "form-data";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -23,25 +22,18 @@ const CompanyLogin = ({ navigation }) => {
   });
 
   const companyLogin = async ({ companyname, password }) => {
-    const formData = new FormData();
-
-    formData.append("name", companyname);
-    formData.append("pass", password);
-
-    var config = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/companylogin",
-      data: formData,
-    };
-
-    await axios(config)
+    await axios
+      .post("https://attendance-backend.bakaotaku.dev/entry", {
+        name: companyname,
+        pass: password,
+      })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response));
         storeData(response.data);
         navigation.navigate("Main");
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 

@@ -3,7 +3,6 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
-import FormData from "form-data";
 import axios from "axios";
 
 const Main = ({ navigation }) => {
@@ -45,17 +44,16 @@ const Main = ({ navigation }) => {
   };
 
   const entryAttendence = async () => {
-
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/entry", 
-      {
-        "company_id": 1,
-        "lat": location.coords.latitude,
-        "long": location.coords.longitude,
-        "image": image,
+      .post("https://attendance-backend.bakaotaku.dev/entry", {
+        company_id: 1,
+        lat: location.coords.latitude,
+        long: location.coords.longitude,
+        image: image,
       })
       .then(function (response) {
         console.log(JSON.stringify(response));
+        navigation.navigate("Sucess");
       })
       .catch(function (error) {
         console.error(error);
@@ -63,26 +61,19 @@ const Main = ({ navigation }) => {
   };
 
   const exitAttendence = () => {
-    const formData = new FormData();
-
-    formData.append("image", image);
-    formData.append("company_id", "1");
-    formData.append("lat", location.coords.latitude);
-    formData.append("long", location.coords.longitude);
-
-    var config = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/exit",
-      data: formData,
-    };
-
-    axios(config)
+    await axios
+      .post("https://attendance-backend.bakaotaku.dev/exit", {
+        company_id: 1,
+        lat: location.coords.latitude,
+        long: location.coords.longitude,
+        image: image,
+      })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response));
         navigation.navigate("Sucess");
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 

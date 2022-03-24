@@ -2,7 +2,6 @@ import { Avatar, Divider, IconButton, List } from "react-native-paper";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import _ from "lodash";
 
 const Admin = ({ navigation }) => {
   const [users, setUsers] = useState([]);
@@ -12,23 +11,16 @@ const Admin = ({ navigation }) => {
   }, []);
 
   const employees = async () => {
-    const formData = new FormData();
-
-    formData.append("company_id", "1");
-
-    var config = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/employees",
-      data: formData,
-    };
-
-    await axios(config)
+    await axios
+      .post("https://attendance-backend.bakaotaku.dev/employees", {
+        company_id: 1,
+      })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response));
         setUsers(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 

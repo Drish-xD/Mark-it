@@ -4,13 +4,11 @@ import {
   StyleSheet,
   ScrollView,
   Text,
-  TextInput,
   ImageBackground,
 } from "react-native";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
-import { Button, Divider } from "react-native-paper";
-import FormData from "form-data";
+import { Button } from "react-native-paper";
 import axios from "axios";
 
 const AdminLogin = ({ navigation }) => {
@@ -23,25 +21,18 @@ const AdminLogin = ({ navigation }) => {
   });
 
   const adminLogin = ({ adminname, password }) => {
-    const formData = new FormData();
-
-    formData.append("username", adminname);
-    formData.append("pass", password);
-    formData.append("company_id", "1");
-
-    var config = {
-      method: "post",
-      url: "https://attendance-backend.bakaotaku.dev/adminlogin",
-      data: formData,
-    };
-
-    axios(config)
+    await axios
+      .post("https://attendance-backend.bakaotaku.dev/adminlogin", {
+        company_id: 1,
+        username: adminname,
+        pass: password,
+      })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response));
         navigation.navigate("Admin");
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
