@@ -34,15 +34,15 @@ const AddUser = ({ navigation }) => {
 
   const registerFace = async ({ employeename, gender }) => {
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/registerface", {
+      .post("http://33ae-103-255-232-154.ngrok.io/registerface", {
         company_id: 1,
         name: employeename,
         gender: gender,
         image: image,
       })
       .then(function (response) {
-        console.log(JSON.stringify(response));
-        navigation.navigate("Main");
+        console.log(JSON.stringify(response.data));
+        navigation.navigate("Admin");
       })
       .catch(function (error) {
         console.error(error);
@@ -54,13 +54,13 @@ const AddUser = ({ navigation }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result.base64);
     }
   };
-
   if (hasCameraPermission === false) {
     return <Text>Please Allow Camera Permissions</Text>;
   }
@@ -102,18 +102,18 @@ const AddUser = ({ navigation }) => {
               required: { message: "Gender is required!", value: true },
             }}
             render={({ field }) => (
-              <>
+              <View style={{backgroundColor: "white"}}>
                 <Picker
                   selectedValue={field.value}
-                  style={{ height: 50, width: "100%", marginBottom: 20 }}
+                  style={{ height: 30, width: "100%", marginBottom: 20 }}
                   onValueChange={(value) => field.onChange(value)}
-                >
+                  >
                   <Picker.Item label="Select Gender" value="" />
                   <Picker.Item label="Male" value="male" />
                   <Picker.Item label="Female" value="female" />
                   <Picker.Item label="Other" value="other" />
                 </Picker>
-              </>
+               </View>
             )}
           />
           {image && (

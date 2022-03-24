@@ -13,7 +13,7 @@ const Home = ({ navigation }) => {
       >
         <Avatar.Icon size={100} icon="check" />
 
-        <Text style={{ color: "white" }}>
+        <Text style={{ color: "white", textAlign: "center" }}>
           <Text style={{ fontSize: 20, fontWeight: "800" }}>Hello Name</Text>
           <Text
             style={{ fontSize: 20, fontWeight: "500", padding: "1rem" }}
@@ -48,5 +48,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     textAlign: "center",
+    width: "100%"
   },
 });

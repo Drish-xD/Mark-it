@@ -23,12 +23,12 @@ const CompanyLogin = ({ navigation }) => {
 
   const companyLogin = async ({ companyname, password }) => {
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/entry", {
+      .post("http://33ae-103-255-232-154.ngrok.io/companylogin", {
         name: companyname,
         pass: password,
       })
       .then(function (response) {
-        console.log(JSON.stringify(response));
+        console.log(JSON.stringify(response.data));
         storeData(response.data);
         navigation.navigate("Main");
       })

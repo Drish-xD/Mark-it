@@ -50,8 +50,8 @@ const CompanyRegister = ({ navigation }) => {
     adminname,
     adminpassword,
   }) => {
-    await all([
-      axios.post("https://attendance-backend.bakaotaku.dev/companyregister", {
+    await axios.all([
+      axios.post("http://33ae-103-255-232-154.ngrok.io/companyregister", {
         name: companyname,
         pass: companypassword,
         lat: location.coords.latitude,
@@ -65,7 +65,7 @@ const CompanyRegister = ({ navigation }) => {
           "H:m"
         ).format(),
       }),
-      axios.post("https://attendance-backend.bakaotaku.dev/adminregister", {
+      axios.post("http://33ae-103-255-232-154.ngrok.io/adminregister", {
         username: adminname,
         pass: adminpassword,
         company_id: 1,

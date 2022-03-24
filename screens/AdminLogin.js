@@ -22,13 +22,13 @@ const AdminLogin = ({ navigation }) => {
 
   const adminLogin = async ({ adminname, password }) => {
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/adminlogin", {
+      .post("http://33ae-103-255-232-154.ngrok.io/adminlogin", {
         company_id: 1,
         username: adminname,
         pass: password,
       })
       .then(function (response) {
-        console.log(JSON.stringify(response));
+        console.log(JSON.stringify(response.data));
         navigation.navigate("Admin");
       })
       .catch(function (error) {

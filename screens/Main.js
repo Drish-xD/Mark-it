@@ -45,14 +45,14 @@ const Main = ({ navigation }) => {
 
   const entryAttendence = async () => {
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/entry", {
+      .post("http://33ae-103-255-232-154.ngrok.io/entry", {
         company_id: 1,
         lat: location.coords.latitude,
         long: location.coords.longitude,
         image: image,
       })
       .then(function (response) {
-        console.log(JSON.stringify(response));
+        console.log(JSON.stringify(response.data));
         navigation.navigate("Sucess");
       })
       .catch(function (error) {
@@ -60,16 +60,16 @@ const Main = ({ navigation }) => {
       });
   };
 
-  const exitAttendence = () => {
+  const exitAttendence = async () => {
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/exit", {
+      .post("http://33ae-103-255-232-154.ngrok.io/exit", {
         company_id: 1,
         lat: location.coords.latitude,
         long: location.coords.longitude,
         image: image,
       })
       .then(function (response) {
-        console.log(JSON.stringify(response));
+        console.log(JSON.stringify(respons.data));
         navigation.navigate("Sucess");
       })
       .catch(function (error) {

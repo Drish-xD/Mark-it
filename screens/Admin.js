@@ -12,11 +12,11 @@ const Admin = ({ navigation }) => {
 
   const employees = async () => {
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/employees", {
+      .post("http://33ae-103-255-232-154.ngrok.io/employees", {
         company_id: 1,
       })
       .then(function (response) {
-        console.log(JSON.stringify(response));
+        console.log(JSON.stringify(response.data));
         setUsers(response.data);
       })
       .catch(function (error) {
