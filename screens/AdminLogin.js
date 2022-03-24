@@ -25,8 +25,9 @@ const AdminLogin = ({ navigation }) => {
   const adminLogin = ({ adminname, password }) => {
     const formData = new FormData();
 
-    formData.append("adminname", adminname);
-    formData.append("password", password);
+    formData.append("username", adminname);
+    formData.append("pass", password);
+    formData.append("company_id", "1");
 
     var config = {
       method: "post",

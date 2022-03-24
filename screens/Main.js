@@ -33,29 +33,26 @@ const Main = ({ navigation }) => {
 
   const pickImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result.base64);
     }
   };
 
   const entryAttendence = async () => {
-    const form = new FormData();
-    
-    form.append("image", image);
-    form.append("company_id", "1");
-    form.append("lat", location.coords.latitude);
-    form.append("long", location.coords.longitude);
 
     await axios
-      .post("https://attendance-backend.bakaotaku.dev/entry", form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      .post("https://attendance-backend.bakaotaku.dev/entry", 
+      {
+        "company_id": 1,
+        "lat": location.coords.latitude,
+        "long": location.coords.longitude,
+        "image": image,
       })
       .then(function (response) {
         console.log(JSON.stringify(response));
@@ -129,7 +126,7 @@ const Main = ({ navigation }) => {
 
         {image && (
           <Image
-            source={{ uri: image }}
+            source={{ uri: `data:image/jpeg;base64,${image}` }}
             style={{ height: 100, width: 100, alignSelf: "center" }}
           />
         )}
