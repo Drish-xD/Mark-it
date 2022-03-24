@@ -32,7 +32,7 @@ const AddUser = ({ navigation }) => {
     })();
   }, []);
 
-  const registerFace = ({ employeename, gender }) => {
+  const registerFace = async ({ employeename, gender }) => {
     await axios
       .post("https://attendance-backend.bakaotaku.dev/registerface", {
         company_id: 1,

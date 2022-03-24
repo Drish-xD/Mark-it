@@ -67,7 +67,7 @@ const CompanyRegister = ({ navigation }) => {
       }),
       axios.post("https://attendance-backend.bakaotaku.dev/adminregister", {
         username: adminname,
-        pass: adminname,
+        pass: adminpassword,
         company_id: 1,
       }),
     ])

@@ -20,7 +20,7 @@ const AdminLogin = ({ navigation }) => {
     mode: "onChange",
   });
 
-  const adminLogin = ({ adminname, password }) => {
+  const adminLogin = async ({ adminname, password }) => {
     await axios
       .post("https://attendance-backend.bakaotaku.dev/adminlogin", {
         company_id: 1,
